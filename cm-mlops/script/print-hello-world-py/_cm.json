@@ -23,9 +23,6 @@
         "python",
         "python3"
       ],
-      "env": {
-        "CM_VERSION": "3.6.7"
-      },
       "tags": "get,python"
     },
     {
