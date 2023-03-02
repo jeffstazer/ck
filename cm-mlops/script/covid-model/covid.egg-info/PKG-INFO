@@ -1,0 +1,10 @@
+Metadata-Version: 2.1
+Name: covid
+Version: 0.0.1
+Summary: Bayesian COVID-19 models
+Home-page: https://github.com/dsheldon/covid-19
+Author: Dan Sheldon
+Author-email: sheldon@cs.umass.edu
+License: MIT
+Keywords: machine learning bayesian statistics
+License-File: LICENSE
