@@ -28,7 +28,7 @@ def preprocess(i):
     env['CM_DOCKER_RUN_CMD'] = CM_RUN_CMD
     DOCKER_CONTAINER = env['CM_DOCKER_IMAGE_REPO'] +  ":" + env['CM_DOCKER_IMAGE_TAG'] 
 
-    CMD = "docker images -q " +  DOCKER_CONTAINER + " 2> /dev/null"
+    CMD = "sudo docker images -q " +  DOCKER_CONTAINER + " 2> /dev/null"
     docker_image = subprocess.check_output(CMD, shell=True).decode("utf-8")
     recreate_image = env.get('CM_DOCKER_IMAGE_RECREATE', '')
 
