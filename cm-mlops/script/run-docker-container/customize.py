@@ -88,7 +88,7 @@ def postprocess(i):
         port_map_cmd_string = ''
     run_opts += port_map_cmd_string
 
-    CONTAINER="docker run -dt "+ run_opts + " --rm " + docker_image_repo + ":" + docker_image_tag + " bash"
+    CONTAINER="sudo docker run -dt "+ run_opts + " --rm " + docker_image_repo + ":" + docker_image_tag + " bash"
     CMD = "ID=`" + CONTAINER + "` && docker exec $ID bash -c '" + run_cmd + "' && docker kill $ID >/dev/null"
     print("Container launch command: " + CMD)
     print("Running "+run_cmd+" inside docker container")
