@@ -12,8 +12,7 @@ def preprocess(i):
         env['CM_DOCKER_RUN_SCRIPT_TAGS'] = "run,docker,container"
         CM_RUN_CMD="cm version"
     else:
-        CM_RUN_CMD="cm run script --quiet --tags=" + env['CM_DOCKER_RUN_SCRIPT_TAGS']
-
+        CM_RUN_CMD="cm run script --tags=" + env['CM_DOCKER_RUN_SCRIPT_TAGS']
     docker_image_base = env.get('CM_DOCKER_IMAGE_BASE', "ubuntu:22.04")
     docker_image_repo = env.get('CM_DOCKER_IMAGE_REPO', "local/" + env['CM_DOCKER_RUN_SCRIPT_TAGS'].replace(',', '-').replace('_',''))
     docker_image_tag = env.get('CM_DOCKER_IMAGE_TAG', docker_image_base.replace(':','-').replace('_','') + "-latest")
@@ -25,8 +24,10 @@ def preprocess(i):
     os.chdir(PATH)
     env['CM_DOCKER_RUN_CMD'] = CM_RUN_CMD
     DOCKER_CONTAINER = docker_image_repo +  ":" + docker_image_tag
+    print(os.getlogin())
+    #    CMD = "docker images -q " +  DOCKER_CONTAINER + " 2> /dev/null"
 
-    CMD = "sudo docker images -q " +  DOCKER_CONTAINER + " 2> /dev/null"
+    CMD = "docker images " +  DOCKER_CONTAINER 
     docker_image = subprocess.check_output(CMD, shell=True).decode("utf-8")
     recreate_image = env.get('CM_DOCKER_IMAGE_RECREATE', '')
 
@@ -44,6 +45,7 @@ def postprocess(i):
 
     docker_image_base = env.get('CM_DOCKER_IMAGE_BASE', "ubuntu:22.04")
     docker_image_repo = env.get('CM_DOCKER_IMAGE_REPO', "local/" + env['CM_DOCKER_RUN_SCRIPT_TAGS'].replace(',', '-').replace('_',''))
+
     docker_image_tag = env.get('CM_DOCKER_IMAGE_TAG', docker_image_base.replace(':','-').replace('_','') + "-latest")
     run_cmds = []
     mount_cmds = []
@@ -88,8 +90,8 @@ def postprocess(i):
         port_map_cmd_string = ''
     run_opts += port_map_cmd_string
 
-    CONTAINER="sudo docker run -dt "+ run_opts + " --rm " + docker_image_repo + ":" + docker_image_tag + " bash"
-    CMD = "ID=`" + CONTAINER + "` && docker exec $ID bash -c '" + run_cmd + "' && docker kill $ID >/dev/null"
+    CONTAINER="docker run -dt "+ run_opts + " --rm " + docker_image_repo + ":" + docker_image_tag + " bash"
+    CMD = "ID=`" + CONTAINER + "` && docker exec $ID bash -c '" + run_cmd + "' && docker kill $ID"
     print("Container launch command: " + CMD)
     print("Running "+run_cmd+" inside docker container")
     docker_out = subprocess.check_output(CMD, shell=True).decode("utf-8")

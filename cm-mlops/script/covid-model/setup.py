@@ -11,7 +11,8 @@ setup(
     install_requires=[
         'patsy>=0.5.1',
         'numpyro==0.6.0',
-        'jax>=0.2.3',
+        'jax==0.2.10',
+        'jaxlib==0.1.62',
 	'pandas==1.1.5',
 	'cachetools',
 	'matplotlib==3.4.0rc1'
