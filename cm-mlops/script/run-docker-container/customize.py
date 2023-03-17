@@ -57,8 +57,9 @@ def postprocess(i):
             run_cmds.append(pre_run_cmd)
 
     if 'CM_DOCKER_VOLUME_MOUNTS' in env:
-        for mounts in env['CM_DOCKER_VOLUME_MOUNTS']:
-            mount_cmds.append(mounts)
+    	mount_cmds = env['CM_DOCKER_VOLUME_MOUNTS']
+        #for mounts in env['CM_DOCKER_VOLUME_MOUNTS']:
+            #mount_cmds.append(mounts)
 
     if 'CM_DOCKER_PASS_USER_GROUP' in env:
         run_opts += " --group-add $(id -g $USER) "
@@ -79,7 +80,8 @@ def postprocess(i):
     run_cmd = " && ".join(run_cmds)
 
     if mount_cmds:
-        mount_cmd_string = " -v " + "-v ".join(mount_cmds)
+        #mount_cmd_string = " -v " + "-v ".join(mount_cmds)
+        mount_cmd_string = " -v " + mount_cmds
     else:
         mount_cmd_string = ''
     run_opts += mount_cmd_string
