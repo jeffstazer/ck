@@ -7,6 +7,8 @@ CM_TMP_CURRENT_SCRIPT_PATH=${CM_TMP_CURRENT_SCRIPT_PATH:-$PWD}
 #echo "Activate conda environment"
 #conda activate ${CM_ENV_CONDA}
 
+sudo chgrp -R cm /home/covid-model-results
+
 cd ${CM_TMP_CURRENT_SCRIPT_PATH}
 echo "Install Bayesian Model..."
 pip install --upgrade pip && pip install -e .
