@@ -15,7 +15,7 @@ if __name__ == "__main__":
     parser.add_argument('place', help='place to use (e.g., US state)')
     parser.add_argument('--start', help='start date', default='2020-03-04')
     parser.add_argument('--end', help='end date', default=None)
-    parser.add_argument('--prefix', help='path prefix for saving results', default='/home/covid-model-results')
+    parser.add_argument('--prefix', help='path prefix for saving results', default='results')
     parser.add_argument('--no-run', help="don't run the model (only do vis)", dest='run', action='store_false')
     parser.add_argument('--config', help='model configuration name', default='SEIRD')
     parser.set_defaults(run=True)

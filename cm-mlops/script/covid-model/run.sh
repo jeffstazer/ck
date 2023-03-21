@@ -7,7 +7,8 @@ CM_TMP_CURRENT_SCRIPT_PATH=${CM_TMP_CURRENT_SCRIPT_PATH:-$PWD}
 #echo "Activate conda environment"
 #conda activate ${CM_ENV_CONDA}
 
-sudo chgrp -R cm /home/covid-model-results
+#sudo chgrp -R cm /home/covid-model-results
+sudo chgrp -R ${CM_DOCKER_GROUP} ${CM_PREFIX}
 
 cd ${CM_TMP_CURRENT_SCRIPT_PATH}
 echo "Install Bayesian Model..."
@@ -17,7 +18,7 @@ echo "Run Model..."
 echo "state: ${CM_ENV_STATE}"
 echo "start: ${CM_ENV_START}"
 echo "end: ${CM_ENV_END}"
-python run_sir.py ${CM_ENV_STATE} --start ${CM_ENV_START} --end ${CM_ENV_END}
+python run_sir.py ${CM_ENV_STATE} --start ${CM_ENV_START} --end ${CM_ENV_END} --prefix ${CM_PREFIX}
 
 #conda deactivate
 

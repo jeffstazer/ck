@@ -227,7 +227,7 @@ def run_place(data,
               num_chains = 1,
               num_prior_samples = 0,              
               T_future=4*7,
-              prefix = "/covid-model/results",
+              prefix = "results",
               resample_low=0,
               resample_high=100,
               save_fields=['beta0', 'beta', 'sigma', 'gamma', 'dy0', 'dy', 'dy_future', 'dz0', 'dz', 'dz_future', 'y0', 'y', 'y_future', 'z0', 'z', 'z_future' ],
@@ -338,7 +338,7 @@ def gen_forecasts(data,
                   end=None,
                   save = True,
                   show = True, 
-                  prefix='/covid-model/results',
+                  prefix='results',
                   **kwargs):
     
 
@@ -416,7 +416,7 @@ def score_place(forecast_date,
                 data,
                 place,
                 model_type=covid.models.SEIRD.SEIRD,
-                prefix="/covid-model/results",
+                prefix="results",
                 target='deaths'):
     '''Gives performance metrics for each time horizon for one place'''
     
@@ -480,7 +480,7 @@ def score_forecast(forecast_date,
                    data, 
                    places=None, 
                    model_type=covid.models.SEIRD.SEIRD,
-                   prefix="/covid-model/results",
+                   prefix="results",
                    target="deaths"):
 
     
