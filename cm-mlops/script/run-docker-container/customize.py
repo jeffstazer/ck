@@ -81,7 +81,7 @@ def postprocess(i):
 
     if mount_cmds:
         #mount_cmd_string = " -v " + "-v ".join(mount_cmds)
-        mount_cmd_string = " -v " + mount_cmds + ':z'
+        mount_cmd_string = " -v " + mount_cmds
     else:
         mount_cmd_string = ''
     run_opts += mount_cmd_string
