@@ -8,7 +8,7 @@ CM_TMP_CURRENT_SCRIPT_PATH=${CM_TMP_CURRENT_SCRIPT_PATH:-$PWD}
 #conda activate ${CM_ENV_CONDA}
 
 #sudo chgrp -R cm /home/covid-model-results
-if [[! -n ${CM_DOCKER_GROUP}] && [! -n ${CM_PREFIX}]]; then
+if [ ! -z ${CM_DOCKER_GROUP} ] && [ ! -z ${CM_PREFIX} ]; then
 	sudo chgrp -R ${CM_DOCKER_GROUP} ${CM_PREFIX}
 fi
 
@@ -20,7 +20,7 @@ echo "Run Model..."
 echo "state: ${CM_ENV_STATE}"
 echo "start: ${CM_ENV_START}"
 echo "end: ${CM_ENV_END}"
-if [[! -n ${CM_DOCKER_GROUP}] && [! -n ${CM_PREFIX}]]; then
+if [ ! -z ${CM_DOCKER_GROUP} ] && [ ! -z ${CM_PREFIX} ]; then
 	echo "prefix: ${CM_PREFIX}"
 	python run_sir.py ${CM_ENV_STATE} --start ${CM_ENV_START} --end ${CM_ENV_END} --prefix ${CM_PREFIX}
 else
